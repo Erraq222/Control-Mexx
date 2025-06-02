@@ -3,33 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quẹt Trái Tim - Game Của Chúng Mình</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tinder Vibe Game 💖</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Tìm Một Nửa Của Anh!</h1>
-        <div class="card-stack">
-            <div class="card" id="card">
-                <img src="images/image1.jpg" alt="Thẻ game" id="card-image">
-                <div class="card-info">
-                    <h2 id="card-name">Tên Em Đó</h2>
-                    <p id="card-description">Mô tả hay ho về em nè...</p>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Tinder Vibe Game ✨</h1>
+            <p>Vuốt để tìm gu của mình nhé!</p>
+        </header>
+
+        <main class="game-area">
+            <div id="card-container" class="card-container">
+                <div class="card initial-card">
+                    <img src="https://via.placeholder.com/300x350/FF6B6B/FFFFFF?text=Start" alt="Bắt đầu">
+                    <div class="card-info">
+                        <h3>Bắt đầu khám phá!</h3>
+                        <p>Vuốt trái bỏ qua, vuốt phải để thích nha. Cứ nhoi nhoi lên nha!</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="controls">
-            <button id="no-btn" class="control-btn no-btn">
-                <img src="https://img.icons8.com/ios/50/FF4500/multiply.png" alt="Không thích">
-            </button>
-            <button id="yes-btn" class="control-btn yes-btn">
-                <img src="https://img.icons8.com/ios/50/20B2AA/heart-outline.png" alt="Thích">
-            </button>
-        </div>
-        <div id="result-message" class="result-message"></div>
+
+            <div class="controls">
+                <button id="dislike-btn" class="control-btn dislike-btn">
+                    <span class="icon">❌</span> Bỏ qua
+                </button>
+                <button id="like-btn" class="control-btn like-btn">
+                    <span class="icon">❤️</span> Thích
+                </button>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>Made with love by Bồ của em 🥰</p>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
-  </html>
-  
+</html>
