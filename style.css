@@ -1,188 +1,235 @@
+/* Thiết lập chung */
+:root {
+    --primary-color: #FF6B6B; /* Hồng tươi - Màu chủ đạo, nổi bật */
+    --secondary-color: #4ECDC4; /* Xanh ngọc - Màu nhấn, tạo sự tươi mới */
+    --bg-light: #F7F9FC; /* Nền sáng, sạch sẽ */
+    --text-dark: #333; /* Màu chữ chính */
+    --text-light: #fff; /* Màu chữ trên nền tối */
+    --card-bg: #FFFFFF; /* Nền thẻ bài */
+    --shadow-light: rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Đổ bóng vừa */
+    --border-radius-lg: 20px; /* Bo góc lớn */
+    --border-radius-md: 15px; /* Bo góc vừa */
+    --font-heading: 'Poppins', sans-serif; /* Font cho tiêu đề */
+    --font-body: 'Inter', sans-serif; /* Font cho nội dung */
+}
+
+* {
+    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước */
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--bg-light) 0%, #E0F2F7 100%); /* Nền gradient sống động */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #FFC0CB, #ADD8E6); /* Hồng pastel + Xanh dương nhạt */
-    margin: 0;
-    overflow: hidden;
-    color: #333;
+    min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao viewport */
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow: hidden; /* Tránh thanh cuộn không mong muốn */
 }
 
-.game-container {
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Container chính của ứng dụng */
+.app-container {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 15px 30px var(--shadow-medium); /* Đổ bóng sâu, ấn tượng */
     padding: 30px;
     text-align: center;
     width: 90%;
-    max-width: 400px;
-    animation: fadeIn 1s ease-out;
-    position: relative;
-    z-index: 1;
-}
-
-h1 {
-    color: #E91E63; /* Hồng đậm */
-    margin-bottom: 25px;
-    font-size: 2em;
-}
-
-.card-stack {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Chiều cao cố định cho stack */
-    margin-bottom: 30px;
+    max-width: 450px; /* Giới hạn chiều rộng để hiển thị tốt trên di động */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 25px; /* Khoảng cách giữa các phần tử */
+    position: relative;
+}
+
+/* Header của ứng dụng */
+.app-header {
+    margin-bottom: 20px;
+}
+
+.app-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Hiệu ứng chữ nhẹ nhàng */
+    margin-bottom: 10px;
+}
+
+.app-header p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Khu vực game chính chứa thẻ bài và nút điều khiển */
+.game-area {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 30px;
+    position: relative;
+    min-height: 480px; /* Đảm bảo đủ không gian cho thẻ và hiệu ứng */
+}
+
+/* Container chứa các thẻ bài */
+.card-container {
+    position: relative;
+    width: 300px; /* Kích thước cố định cho thẻ */
+    height: 400px;
+    margin: 0 auto;
 }
 
 .card {
-    position: absolute;
+    position: absolute; /* Xếp chồng các thẻ lên nhau */
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 8px 16px var(--shadow-light);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    cursor: grab; /* Để kéo thẻ */
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-    will-change: transform, opacity; /* Tối ưu hiệu suất */
+    overflow: hidden; /* Đảm bảo ảnh bo góc */
+    cursor: grab; /* Con trỏ hình bàn tay để gợi ý kéo */
+    will-change: transform, opacity; /* Tối ưu hóa hiệu suất animation */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Hiệu ứng chuyển động mượt mà */
+    transform-origin: center bottom; /* Xoay từ phía dưới để tạo hiệu ứng vuốt chân thực */
+}
+
+/* Thẻ "Bắt đầu" đặc biệt */
+.card.initial-card {
+    background: linear-gradient(45deg, var(--primary-color), #FF9A8B); /* Gradient bắt mắt */
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 20px;
+    z-index: 1; /* Đảm bảo nó nằm dưới các thẻ khác khi load */
+}
+.card.initial-card img {
+    height: 60%;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
 .card img {
     width: 100%;
     height: 70%;
-    object-fit: cover;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    object-fit: cover; /* Đảm bảo ảnh phủ kín và không bị biến dạng */
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
 }
 
 .card-info {
     padding: 15px;
-    text-align: left;
-    flex-grow: 1; /* Cho phép phần info giãn nở */
+    flex-grow: 1; /* Đảm bảo phần info chiếm hết không gian còn lại */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
-.card-info h2 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #4A90E2; /* Xanh dương */
+.card-info h3 {
+    font-family: var(--font-heading);
     font-size: 1.6em;
+    margin-bottom: 5px;
+    color: var(--primary-color);
 }
 
 .card-info p {
-    font-size: 0.9em;
-    color: #666;
-    line-height: 1.5;
+    font-size: 1em;
+    color: #555;
+    text-align: center;
 }
 
+/* Các nút điều khiển */
 .controls {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
+    gap: 20px; /* Khoảng cách giữa các nút */
     margin-top: 20px;
+    z-index: 10; /* Đảm bảo nút nằm trên thẻ khi vuốt */
 }
 
 .control-btn {
-    background: none;
+    background: var(--card-bg);
     border: none;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 50%; /* Nút tròn đẹp mắt */
+    width: 70px;
+    height: 70px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    transition: all 0.2s ease-in-out; /* Hiệu ứng khi hover và click */
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8em;
+    color: var(--text-dark);
 }
 
-.control-btn img {
-    width: 40px;
-    height: 40px;
+.control-btn .icon {
+    font-size: 2em; /* Kích thước icon lớn */
+    margin-bottom: 3px;
 }
 
-.no-btn {
-    background-color: #FFEBEE; /* Hồng nhạt */
-}
-.no-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.2);
+.control-btn:hover {
+    transform: translateY(-5px) scale(1.05); /* Nảy lên và phóng to nhẹ khi hover */
+    box-shadow: 0 8px 16px var(--shadow-medium);
 }
 
-.yes-btn {
-    background-color: #E8F5E9; /* Xanh lá nhạt */
-}
-.yes-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(32, 178, 170, 0.2);
+.control-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px var(--shadow-light);
 }
 
-/* Hiệu ứng khi kéo thẻ */
-.card.moving {
-    cursor: grabbing;
+.dislike-btn .icon {
+    color: #FF5C5C; /* Màu đỏ nổi bật cho nút bỏ qua */
 }
 
-.card.left {
-    transform: translateX(-150%) rotate(-15deg) scale(0.8);
-    opacity: 0;
+.like-btn .icon {
+    color: #4CAF50; /* Màu xanh lá nổi bật cho nút thích */
 }
 
-.card.right {
-    transform: translateX(150%) rotate(15deg) scale(0.8);
-    opacity: 0;
+/* Footer của ứng dụng */
+.app-footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #888;
 }
 
-.result-message {
-    margin-top: 25px;
-    font-size: 1.2em;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-}
-
-.result-message.show {
-    opacity: 1;
-}
-
-.result-message.like {
-    color: #20B2AA; /* Xanh tươi */
-}
-
-.result-message.dislike {
-    color: #FF4500; /* Đỏ cam */
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .game-container {
+/* Responsive cho màn hình nhỏ hơn (điện thoại) */
+@media (max-width: 480px) {
+    .app-container {
         padding: 20px;
+        border-radius: 15px;
     }
-    .card-stack {
-        height: 350px;
+
+    .app-header h1 {
+        font-size: 2em;
     }
-    .card-info h2 {
-        font-size: 1.4em;
+
+    .card-container {
+        width: 280px;
+        height: 380px;
     }
-    .card-info p {
-        font-size: 0.8em;
+
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 0.7em;
     }
-    .control-btn img {
-        width: 35px;
-        height: 35px;
+
+    .control-btn .icon {
+        font-size: 1.8em;
     }
-  }
-  
+    }
